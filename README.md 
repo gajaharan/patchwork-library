@@ -1,2 +1,42 @@
 # patchwork-library
 
+## Technologies
+* Java 17
+* Kotlin 1.8
+* Gradle
+* JUnit 5
+
+## Build and Run
+
+### How to run tests at root project:
+`./gradlew clean test`
+
+### Assumptions:
+* This is not a console driven application. Everything is done via tests defined by the stories.
+* “test-first” approach can be viewed in the commit history. Incrementally building the simplest library service  while writing the test before hand where possible.
+* Books and Users are "loaded" into the Library service for the tests.
+
+* Clean working code with appropriate design pattern (strategy pattern) and SOLID principles.
+
+### Further improvements if time allowed:
+* If I had more time I would implement the Reservation service to handle and track reserving/borrowing books with start and end dates.
+* The system can distinguish different type of users e.g. borrower and librarian.
+* Handle more error scenarios via the tests
+
+## Patchwork health code exercise
+Context: I have many books which I would like to share with my community. That sounds like a library. Please write some software to help me do that.
+
+### Instructions:
+- Please create a GitHub repository containing code for a book lending library. Use the stories below for requirements.
+- This is just be a text-based exercise - no GUI code is required.
+- We also don’t expect a DB or persistence layer. Just prove it works by calling the relevant functions from other code.
+- Please don’t spend any more than 2 to 3 hours on this. We don’t expect a complete solution, but something that we can use as the basis for a follow-on conversation.
+- When you are ready, please send us a link to your repository.
+
+### Stories:
+- As a library user, I would like to be able to find books by my favourite author, so that I know if they are available in the library.
+- As a library user, I would like to be able to find books by title, so that I know if they are available in the library.
+- As a library user, I would like to be able to find books by ISBN, so that I know if they are available in the library.
+- As a library user, I would like to be able to borrow a book, so I can read it at home.
+- As the library owner, I would like to know how many books are being borrowed, so I can see how many are outstanding.
+- As a library user, I should be to prevented from borrowing reference books, so that they are always available.
