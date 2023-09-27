@@ -78,4 +78,21 @@ internal class LibraryServiceTest {
         val actual: String = library.borrow(book1, user1.id)
         assertEquals(expected, actual);
     }
+
+    @Test
+    fun `As the library owner, I would like to know how many books are being borrowed, so I can see how many are outstanding`() {
+        val expectedBorrowedBook = 1
+        val expectedOutstandingBooks = 1
+
+        val library = LibraryService(
+            mutableMapOf(book1.id to book1, book2.id to book2),
+            setOf(user1)
+        )
+        library.borrow(book1, user1.id)
+
+        val actualBorrowedBook: Int = library.getCurrentBorrowedBooks().size
+        assertEquals(expectedBorrowedBook, actualBorrowedBook)
+        val actualOutstandingBooks = library.getAllBooks().size - actualBorrowedBook
+        assertEquals(expectedOutstandingBooks, actualOutstandingBooks)
+    }
 }

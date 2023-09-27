@@ -22,7 +22,6 @@ class LibraryService(
 
 
     fun borrow(selectedBook: Book, userId: Long): String {
-
         val book = books.values.find { it == selectedBook }
         book?.let { book ->
             val user: BorrowerUser? = users.find { it.id == userId }
@@ -32,4 +31,8 @@ class LibraryService(
         }
         return "Book ${selectedBook.isbn} is not on the system"
     }
+
+    fun getCurrentBorrowedBooks(): Map<Long, Book> = books.filter { !it.value.isAvailable }.toMap()
+
+    fun getAllBooks() = books
 }
