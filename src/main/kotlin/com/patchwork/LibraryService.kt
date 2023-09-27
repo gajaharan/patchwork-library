@@ -20,19 +20,25 @@ class LibraryService(
         return "No book found"
     }
 
-
-    fun borrow(selectedBook: Book, userId: Long): String {
-        val book = books.values.find { it == selectedBook }
-        book?.let { book ->
-            val user: BorrowerUser? = users.find { it.id == userId }
-            user?.borrowedBooks?.add(book) ?: return "User not found: $userId"
-            books[selectedBook.id] = selectedBook.copy(isAvailable = false)
-            return "Book $book successfully checked out for ${user.name}"
+    fun borrow(selectedBook: Book, user: BorrowerUser): String {
+        if (selectedBook.category == "reference") {
+            return "${selectedBook.title} is a reference book"
         }
-        return "Book ${selectedBook.isbn} is not on the system"
+
+        if (books.none { it.value == selectedBook }) {
+            return "Book ${selectedBook.isbn} is not on the system"
+        }
+
+        reserveBook(selectedBook, user)
+        return "Book $selectedBook successfully checked out for ${user.name}"
     }
 
     fun getCurrentBorrowedBooks(): Map<Long, Book> = books.filter { !it.value.isAvailable }.toMap()
 
     fun getAllBooks() = books
+
+    private fun reserveBook(selectedBook: Book, user: BorrowerUser) {
+        books[selectedBook.id] = selectedBook.copy(isAvailable = false)
+        user.borrowedBooks.add(selectedBook)
+    }
 }

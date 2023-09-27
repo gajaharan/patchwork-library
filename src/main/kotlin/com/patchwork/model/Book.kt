@@ -5,6 +5,7 @@ data class Book(
     val title: String,
     val author: String,
     val isbn: Long,
+    val category: String,
     val isAvailable: Boolean = true
 ) {
     override fun toString(): String {
