@@ -11,6 +11,7 @@ class LibraryService(
         val book: Book? = books.find {
             it.author.lowercase().contains(searchTerm.lowercase())
                     || it.title.lowercase().contains(searchTerm.lowercase())
+                    || it.isbn.toString() == searchTerm
                     && it.isAvailable
         }
         book?.let {
