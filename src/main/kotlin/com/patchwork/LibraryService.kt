@@ -7,8 +7,12 @@ class LibraryService(
 ) {
     fun add(book: Book) = books.add(book)
 
-    fun find(title: String): String {
-        val book: Book? = books.find { it.author.contains(title) }
+    fun find(searchTerm: String): String {
+        val book: Book? = books.find {
+            it.author.lowercase().contains(searchTerm.lowercase())
+                    || it.title.lowercase().contains(searchTerm.lowercase())
+                    && it.isAvailable
+        }
         book?.let {
             return "Book found: $it"
         }
