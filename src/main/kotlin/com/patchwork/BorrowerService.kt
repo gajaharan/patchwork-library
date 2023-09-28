@@ -3,7 +3,7 @@ package com.patchwork
 import com.patchwork.model.Book
 import com.patchwork.model.BorrowerUser
 
-class LibraryService(
+class BorrowerService(
     private val books: MutableMap<Long, Book> = mutableMapOf(),
     private val users: Set<BorrowerUser> = setOf()
 ) {
